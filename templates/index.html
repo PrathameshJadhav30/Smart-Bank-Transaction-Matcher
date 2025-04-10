@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Transaction Matcher</title>
+    <title>Transaction Sync Tool</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -12,6 +12,14 @@
             display: flex;
             flex-direction: column;
             min-height: 100vh;
+        }
+
+        .header {
+            text-align: center;
+            font-size: 28px;
+            font-weight: bold;
+            color: #7a78ee;
+            margin-bottom: 30px;
         }
 
         .container {
@@ -101,6 +109,9 @@
     </style>
 </head>
 <body>
+
+    <div class="header">⚙️ Transaction Sync Tool</div>
+
     <div class="container">
         <h2>🔍 Match Transactions</h2>
         <form method="POST" action="/match" enctype="multipart/form-data">
@@ -118,5 +129,6 @@
         Developed by <strong>Prathamesh Jadhav</strong> |
         <a href="https://www.instagram.com/prathamesh_jadhav_30/" target="_blank">Instagram</a>
     </footer>
+    
 </body>
 </html>
