@@ -8,6 +8,7 @@ app = Flask(__name__)
 app.secret_key = 'secret'
 app.config['SESSION_TYPE'] = 'filesystem'
 app.config['SESSION_COOKIE_NAME'] = 'session'
+app.config['SESSION_PERMANENT'] = False
 Session(app)
 
 # Function to extract UTR number from any text
