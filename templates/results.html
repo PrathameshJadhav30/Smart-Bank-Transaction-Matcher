@@ -5,41 +5,95 @@
     <title>Match Results</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 40px;
-            background-color: #eef2f5;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #e9eff3;
+            margin: 0;
+            padding: 40px 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
+
         .container {
-            background-color: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 0 12px rgba(0,0,0,0.1);
-            max-width: 600px;
+            background-color: #ffffff;
+            max-width: 500px;
             margin: auto;
+            padding: 40px 30px;
+            border-radius: 16px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
             text-align: center;
+            transition: transform 0.3s ease;
         }
+
+        .container:hover {
+            transform: scale(1.01);
+        }
+
         h2 {
-            margin-bottom: 30px;
+            color: #2c3e50;
+            margin-bottom: 25px;
+            font-size: 24px;
         }
-        a.button {
+
+        .button {
             display: inline-block;
-            padding: 12px 25px;
-            margin: 10px;
+            margin: 10px 5px;
+            padding: 12px 28px;
             background-color: #4caf50;
-            color: white;
+            color: #fff;
+            font-weight: 500;
             text-decoration: none;
-            border-radius: 5px;
+            border-radius: 8px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
         }
-        a.button:hover {
+
+        .button:hover {
             background-color: #388e3c;
+            transform: translateY(-2px);
+        }
+
+        footer {
+            margin-top: auto;
+            background-color: #ffffff;
+            text-align: center;
+            padding: 20px 10px;
+            font-size: 14px;
+            color: #777;
+            border-top: 1px solid #ddd;
+        }
+
+        footer a {
+            color: #2196f3;
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                margin: 20px;
+                padding: 30px 20px;
+            }
+
+            .button {
+                width: 100%;
+                margin-top: 10px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h2>Matching Completed</h2>
+        <h2>✅ Matching Completed Successfully!</h2>
         <a href="/download/matched" class="button">Download Matched Transactions</a>
         <a href="/download/unmatched" class="button">Download Unmatched Transactions</a>
     </div>
+
+    <footer>
+        Developed by <strong>Prathamesh Jadhav</strong> |
+        <a href="https://www.instagram.com/prathamesh_jadhav_30/" target="_blank">Instagram</a>
+    </footer>
 </body>
 </html>
