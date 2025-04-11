@@ -1,110 +1,163 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Transaction Sync Tool</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #e9eff3;
-            margin: 0;
-            padding: 40px 0;
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
+  <meta charset="UTF-8">
+  <title>Transaction Sync Tool</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #e9eff3;
+      margin: 0;
+      padding: 40px 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
 
-        .header {
-            text-align: center;
-            font-size: 28px;
-            font-weight: bold;
-            color: #ab7be9;
-            margin-bottom: 30px;
-        }
+    .header {
+      background-color: #ffffff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 30px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+      flex-wrap: wrap;
+    }
 
-        .container {
-            background-color: #ffffff;
-            max-width: 500px;
-            margin: auto;
-            padding: 40px 30px;
-            border-radius: 16px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-            text-align: center;
-            transition: transform 0.3s ease;
-        }
+    .bank-info {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
 
-        .container:hover {
-            transform: scale(1.01);
-        }
+    .bank-logo {
+      width: 100px;
+      height: 100px;
+      object-fit: contain;
+      border-radius: 8px;
+    }
 
-        h2 {
-            color: #2c3e50;
-            margin-bottom: 25px;
-            font-size: 24px;
-        }
+    .bank-name {
+      font-size: 20px;
+      font-weight: bold;
+      color: #333;
+    }
 
-        .button {
-            display: inline-block;
-            margin: 10px 5px;
-            padding: 12px 28px;
-            background-color: #4caf50;
-            color: #fff;
-            font-weight: 500;
-            text-decoration: none;
-            border-radius: 8px;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-        }
+    .tool-name {
+      font-size: 22px;
+      font-weight: 600;
+      color: #7a78ee;
+      margin-top: 8px;
+    }
 
-        .button:hover {
-            background-color: #388e3c;
-            transform: translateY(-2px);
-        }
+    .container {
+      background-color: #ffffff;
+      max-width: 500px;
+      margin: 40px auto;
+      padding: 40px 30px;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+      text-align: center;
+      transition: transform 0.3s ease;
+    }
 
-        footer {
-            margin-top: auto;
-            background-color: #ffffff;
-            text-align: center;
-            padding: 20px 10px;
-            font-size: 14px;
-            color: #777;
-            border-top: 1px solid #ddd;
-        }
+    .container:hover {
+      transform: scale(1.01);
+    }
 
-        footer a {
-            color: #2196f3;
-            text-decoration: none;
-        }
+    h2 {
+      color: #2c3e50;
+      margin-bottom: 25px;
+      font-size: 24px;
+    }
 
-        footer a:hover {
-            text-decoration: underline;
-        }
+    .button {
+      display: inline-block;
+      margin: 10px 5px;
+      padding: 12px 28px;
+      background-color: #4caf50;
+      color: #fff;
+      font-weight: 500;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
 
-        @media (max-width: 600px) {
-            .container {
-                margin: 20px;
-                padding: 30px 20px;
-            }
+    .button:hover {
+      background-color: #388e3c;
+      transform: translateY(-2px);
+    }
 
-            .button {
-                width: 100%;
-                margin-top: 10px;
-            }
-        }
-    </style>
+    footer {
+      margin-top: auto;
+      background-color: #ffffff;
+      text-align: center;
+      padding: 20px 10px;
+      font-size: 14px;
+      color: #777;
+      border-top: 1px solid #ddd;
+    }
+
+    footer a {
+      color: #2196f3;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 600px) {
+      .header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        padding: 20px;
+      }
+
+      .tool-name {
+        align-self: flex-end;
+        font-size: 16px;
+        text-align: right;
+        width: 100%;
+      }
+
+      .bank-name {
+        font-size: 18px;
+      }
+
+      .container {
+        margin: 20px;
+        padding: 30px 20px;
+      }
+
+      .button {
+        width: 100%;
+        margin-top: 10px;
+      }
+    }
+  </style>
 </head>
 <body>
 
-    <div class="header">⚙️ Transaction Sync Tool</div>
-
-    <div class="container">
-        <h2>✅ Matching Completed Successfully!</h2>
-        <a href="/download/matched" class="button">Download Matched Transactions</a>
-        <a href="/download/unmatched" class="button">Download Unmatched Transactions</a>
+  <div class="header">
+    <div class="bank-info">
+      <img src="{{ url_for('static', filename='bank-logo.jpg') }}" alt="Bank Logo" class="bank-logo" />
+      <div class="bank-name">NANDANI SAHAKARI BANK LTD, NANDANI</div>
     </div>
+    <div class="tool-name">⚙️ Transaction Sync Tool</div>
+  </div>
 
-    <footer>
-        Developed by <strong>Prathamesh Jadhav</strong> |
-        <a href="https://www.instagram.com/prathamesh_jadhav_30/" target="_blank">Instagram</a>
-    </footer>
+  <div class="container">
+    <h2>✅ Matching Completed Successfully!</h2>
+    <a href="/download/matched" class="button">Download Matched Transactions</a>
+    <a href="/download/unmatched" class="button">Download Unmatched Transactions</a>
+  </div>
+
+  <footer>
+    Developed by <strong>Prathamesh Jadhav</strong> |
+    <a href="https://www.instagram.com/prathamesh_jadhav_30/" target="_blank">Instagram</a>
+  </footer>
+
 </body>
 </html>
