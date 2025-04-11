@@ -25,12 +25,18 @@ def index():
 
 @app.route('/match', methods=['POST'])
 def match():
-    hdfc_file = request.files['hdfc_file']
-    cbs_file = request.files['cbs_file']
+    try:
+        hdfc_file = request.files.get('hdfc_file')
+        cbs_file = request.files.get('cbs_file')
 
-    if hdfc_file and cbs_file:
+        if not hdfc_file or not cbs_file:
+            return "Error: Both files are required.", 400
+
         hdfc_df = pd.read_excel(hdfc_file)
         cbs_df = pd.read_excel(cbs_file)
+
+        if 'Txn Ref No' not in hdfc_df.columns:
+            return "Error: 'Txn Ref No' column missing in HDFC file.", 400
 
         # Clean and standardize HDFC Txn Ref No
         hdfc_df['Txn Ref No'] = hdfc_df['Txn Ref No'].astype(str).str.strip()
@@ -52,7 +58,6 @@ def match():
         columns_required = ['Txn Ref No', 'Narration', 'Cr Amt']
         unmatched_df = unmatched_df[[col for col in columns_required if col in unmatched_df.columns]]
 
-        # Replace 0 values in Cr Amt with blank
         if 'Cr Amt' in unmatched_df.columns:
             unmatched_df['Cr Amt'] = unmatched_df['Cr Amt'].apply(lambda x: '' if x == 0 else x)
 
@@ -69,7 +74,8 @@ def match():
 
         return redirect(url_for('results'))
 
-    return redirect(url_for('index'))
+    except Exception as e:
+        return f"Internal Server Error: {str(e)}", 500
 
 @app.route('/results')
 def results():
